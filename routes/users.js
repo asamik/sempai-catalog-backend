@@ -66,6 +66,7 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+  console.log('reached login route')
   User.login(req.body, (err, token) => {
     if (err) return res.status(400).send(err);
     console.log('token', token)
