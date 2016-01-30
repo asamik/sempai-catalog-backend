@@ -25,7 +25,11 @@ app.use(bodyParser.urlencoded({limit: '2mb'}, { extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/build')));
 
-app.use(cors);
+var corsOptions = {
+  origin: true,
+  methods: ['POST', 'GET', 'PUT']
+};
+app.use(cors(corsOptions));
 
 app.use('/users', require('./routes/users'));
 app.use('/admins', require('./routes/admins'));
