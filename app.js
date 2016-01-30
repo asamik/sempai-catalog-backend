@@ -6,10 +6,11 @@ const express = require('express')
     , logger = require('morgan')
     , cookieParser = require('cookie-parser')
     , bodyParser = require('body-parser')
-    , mongoose = require('mongoose');
+    , mongoose = require('mongoose')
+    , cors = require('cors');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/connectproject');
-
+    
 var app = express();
 
 // view engine setup
@@ -23,10 +24,7 @@ app.use(bodyParser.json({limit: '2mb'}));
 app.use(bodyParser.urlencoded({limit: '2mb'}, { extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/build')));
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  next();
-  })
+app.use(cors());
 
 app.use('/users', require('./routes/users'));
 app.use('/admins', require('./routes/admins'));
