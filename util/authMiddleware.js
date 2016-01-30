@@ -6,7 +6,7 @@ const jwt     = require('jwt-simple')
     , Teacher = require('../models/userModel');
 
 module.exports = function(req, res, next) {
-  console.log('auth req:', req.body)
+  console.log('auth req:', req)
   if (!req.body.token) {
     return res.status(401).send('authorization required');
   }
