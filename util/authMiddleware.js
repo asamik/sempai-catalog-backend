@@ -6,14 +6,13 @@ const jwt     = require('jwt-simple')
     , Teacher = require('../models/userModel');
 
 module.exports = function(req, res, next) {
-  let token = req.cookies.token;
-
-  if (!token) {
+  console.log('auth req:', req.body.token)
+  if (!req.body.token) {
     return res.status(401).send('authorization required');
   }
 
   try {
-    var decoded = jwt.decode(token, process.env.JWT_SECRET);
+    let decoded = jwt.decode(req.body.token, process.env.JWT_SECRET);
   } catch (e) {
     return res.status(401).send('authorization required');
   }
