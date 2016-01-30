@@ -35,18 +35,15 @@ userSchema.methods.token = function() {
 
 userSchema.statics.login = function(userInfo, cb) {
   // look for user in database
-  console.log('userInfo', userInfo)
   User.findOne({email: userInfo.email}, (err, foundUser) => {
-  console.log('foundUser', foundUser)
     if (err) return cb('server error');
     if (!foundUser) return cb('incorrect email or password');
     bcrypt.compare(userInfo.password, foundUser.password, (err, isGood) => {
       if (err) return cb('server err');
       if (isGood) {
         foundUser.password = null;
-  console.log('foundUser2:', foundUser)
-
-        return cb(null, foundUser.token());
+        let userInfoWithToken = { id: foundUser._id, token: foundUser.token() };
+        return cb(null, userInfoWithToken);
       } else {
         return cb('incorrect email or password');
       }

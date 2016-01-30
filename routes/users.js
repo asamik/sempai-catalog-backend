@@ -66,11 +66,10 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  console.log('reached login route')
-  User.login(req.body, (err, token) => {
+  User.login(req.body, (err, userInfoWithToken) => {
     if (err) return res.status(400).send(err);
-    console.log('token', token)
-    res.json({token: token});
+    console.log('token', userInfoWithToken)
+    res.json(userInfoWithToken);
   });
 });
 
