@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public/build')));
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
-  }
+  })
 
 app.use('/users', require('./routes/users'));
 app.use('/admins', require('./routes/admins'));
