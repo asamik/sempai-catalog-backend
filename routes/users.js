@@ -68,6 +68,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
   User.login(req.body, (err, token) => {
     if (err) return res.status(400).send(err);
+    console.log('token', token)
     res.cookie('token', token).send();
   });
 });
