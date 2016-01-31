@@ -35,7 +35,6 @@ app.use('/users', require('./routes/users'));
 app.use('/admins', require('./routes/admins'));
 
 app.all('/*', function(req, res, next) {
-    // Just send the index.html for other files to support HTML5Mode
     res.sendFile('index.html', { root: path.join(__dirname, 'public/build') });
 });
 

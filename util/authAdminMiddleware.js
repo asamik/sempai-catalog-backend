@@ -2,8 +2,7 @@
 
 const jwt    = require('jwt-simple')
     , moment = require('moment')
-    , CONFIG = require('./authConfig')
-    , Teacher   = require('../models/userModel');
+    , CONFIG = require('./authConfig');
 
 module.exports = function(req, res, next) {
   let token = req.cookies.token;

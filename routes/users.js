@@ -74,6 +74,7 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/:id', authenticate, (req, res) => {
+  console.log('user info in router params:', req.params.id)
   User.findById(req.params.id, (err, user) => {
     if (err || !user) return res.status(400).send(err || 'user not found');
     user.password = null;
