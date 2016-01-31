@@ -85,7 +85,9 @@ userSchema.statics.register = function(userInfo, cb) {
         });
         newUser.save((err, savedUser) => {
           savedUser.password = null;
-          return cb(err, savedUser.token());
+          let userInfoWithToken = { id: savedUser._id, token: savedUser.token() };
+          console.log("userInfoWithToken", userInfoWithToken)
+          return cb(err, userInfoWithToken);
         })
       });
     });

@@ -59,16 +59,15 @@ router.post('/checkemail', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  User.register(req.body, (err, token) => {
+  User.register(req.body, (err, userInfoWithToken) => {
     if (err) return res.status(400).send(err);
-    res.cookie('token', token).send();
+    res.json(userInfoWithToken);
   });
 });
 
 router.post('/login', (req, res) => {
   User.login(req.body, (err, userInfoWithToken) => {
     if (err) return res.status(400).send(err);
-    console.log('token', userInfoWithToken)
     res.json(userInfoWithToken);
   });
 });
