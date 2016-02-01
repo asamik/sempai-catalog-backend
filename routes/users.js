@@ -3,52 +3,99 @@
 const express        = require('express')
     , User           = require('../models/userModel')
     , SpeakerDetail  = require('../models/speakerdetailModel')
-    , authenticate   = require('../util/authMiddleware');
+    , authenticate   = require('../util/authMiddleware')
+    , async          = require('async');
 
 let router = express.Router();
 
 router.get('/', authenticate, (req, res) => {
   User.find({'speaker': true}, (err, users) => {
-    if (err) return res.status(400).send(err);
     users.forEach(user => {
       user.password = null;
       return user;
     });
-    res.send(users);
+    if (err) return res.status(400).send(err);
+    let allSpeakersFullInfo = [];
+console.log("users:", users)
+    async.map(users, findspeakerFullInfowithcb(user, cb), function(err, allSpeakersFullInfo) {
+      if(err) {
+        return res.status(400).send(err)
+      } else {
+        console.log("allSpeakersFullInfo1", allSpeakersFullInfo);
+        res.send(allSpeakersFullInfo);
+      }
+    });
+
+    // allSpeakersFullInfo = users.map(user => {
+    //    return findspeakerFullInfo(user._id);  
+    // });
+
   })
 });
 
 router.get('/speaker/:speakerid', authenticate,(req, res) => {
-  let speakerFullInfo = {};
-  User.findById(req.params.speakerid, (err, speaker) => {
-    if (err || !speaker) return res.status(400).send(err || 'speaker not found');
-
-    SpeakerDetail.findOne({userId: speaker._id}, (err, speakerdetail) => {
-      if (err || !speakerdetail) return res.status(400).send(err || 'speakerdetail not found');
-
-//WET- refactor later!... 
-
-      speakerFullInfo.id = speaker._id
-      speakerFullInfo.email = speaker.email
-      speakerFullInfo.name = speaker.name
-      speakerFullInfo.organization = speaker.organization
-      speakerFullInfo.position = speaker.position
-      speakerFullInfo.region = speaker.region
-      speakerFullInfo.profilepic = speaker.profilepic
-      speakerFullInfo.admin = speaker.admin
-      speakerFullInfo.speaker = speaker.speaker
-
-      speakerFullInfo.expertise = speakerdetail.expertise
-      speakerFullInfo.fee = speakerdetail.fee
-      speakerFullInfo.topics = speakerdetail.topics
-      speakerFullInfo.header = speakerdetail.header
-      speakerFullInfo.selfintroduction = speakerdetail.selfintroduction
-      speakerFullInfo.background = speakerdetail.background
-      speakerFullInfo.referencecomment = speakerdetail.referencecomment
-      res.send(speakerFullInfo);
-    });
-  });
+  res.send(findspeakerFullInfo(req.params.speakerid));
 });
+
+function findspeakerFullInfo (speaker) {
+  let speakerFullInfo = {};
+  User.findById(speaker._id, (err, speaker) => {
+    if (err || !speaker) return (err || 'speaker not found');
+    speakerFullInfo.id = speaker._id
+    speakerFullInfo.email = speaker.email
+    speakerFullInfo.name = speaker.name
+    speakerFullInfo.organization = speaker.organization
+    speakerFullInfo.position = speaker.position
+    speakerFullInfo.region = speaker.region
+    speakerFullInfo.profilepic = speaker.profilepic
+    speakerFullInfo.admin = speaker.admin
+    speakerFullInfo.speaker = speaker.speaker
+  });
+  
+  SpeakerDetail.findOne({userId: speaker._id}, (err, speakerdetail) => {
+    if (err || !speakerdetail) return (err || 'speakerdetail not found');
+//WET- refactor later!... 
+    speakerFullInfo.expertise = speakerdetail.expertise
+    speakerFullInfo.fee = speakerdetail.fee
+    speakerFullInfo.topics = speakerdetail.topics
+    speakerFullInfo.header = speakerdetail.header
+    speakerFullInfo.selfintroduction = speakerdetail.selfintroduction
+    speakerFullInfo.background = speakerdetail.background
+    speakerFullInfo.referencecomment = speakerdetail.referencecomment
+  });  
+  return speakerFullInfo;
+}
+
+function findspeakerFullInfowithcb (speaker, cb) {
+  console.log("speaker", speaker)
+
+  let speakerFullInfo = {};
+  User.findById(speaker._id, (err, speaker) => {
+    if (err || !speaker) return (err || 'speaker not found');
+    speakerFullInfo.id = speaker._id
+    speakerFullInfo.email = speaker.email
+    speakerFullInfo.name = speaker.name
+    speakerFullInfo.organization = speaker.organization
+    speakerFullInfo.position = speaker.position
+    speakerFullInfo.region = speaker.region
+    speakerFullInfo.profilepic = speaker.profilepic
+    speakerFullInfo.admin = speaker.admin
+    speakerFullInfo.speaker = speaker.speaker
+  });
+  
+  SpeakerDetail.findOne({userId: speaker._id}, (err, speakerdetail) => {
+    if (err || !speakerdetail) return (err || 'speakerdetail not found');
+//WET- refactor later!... 
+    speakerFullInfo.expertise = speakerdetail.expertise
+    speakerFullInfo.fee = speakerdetail.fee
+    speakerFullInfo.topics = speakerdetail.topics
+    speakerFullInfo.header = speakerdetail.header
+    speakerFullInfo.selfintroduction = speakerdetail.selfintroduction
+    speakerFullInfo.background = speakerdetail.background
+    speakerFullInfo.referencecomment = speakerdetail.referencecomment
+  });  
+  return cb(null, speakerFullInfo);
+}
 
 router.post('/checkemail', (req, res) => {
   User.findOne({email: req.body.email}, (err, user) => {
@@ -98,8 +145,6 @@ router.put('/edit/:id', authenticate, (req, res) => {
 })
 
 router.put('/editspeakerdetail/:id', authenticate, (req, res) => {
-  console.log("reached editspeakerdetail", req.body)
-  console.log("reached editspeakerdetail and params", req.params)
   SpeakerDetail.findOneAndUpdate({userId: req.params.id}, { $set: req.body }, function(err, user){
     res.status(err ? 400 : 200).send(err || user);
   })
