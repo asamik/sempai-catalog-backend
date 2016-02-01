@@ -14,7 +14,6 @@ let userSchema = mongoose.Schema({
   email: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   name: {type: String},
-  phone: {type: String},
   organization: {type: String},
   position: {type: String},
   region: {type: String},
@@ -78,7 +77,6 @@ userSchema.statics.register = function(userInfo, cb) {
           email: email,
           password: hashedPassword,
           name: userInfo.name,
-          phone: userInfo.phone,
           organization: userInfo.organization,
           position: userInfo.position,
           profilePic: userInfo.profilePic

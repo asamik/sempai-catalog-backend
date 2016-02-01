@@ -30,7 +30,6 @@ speakerDetailSchema.statics.register = function(speakerDetail, cb) {
     User.findByIdAndUpdate(user._id, {$set: {speaker: true}}, (err, user) => {
       if (err) return cb('error updating speaker to true');
 
-      console.log("after user", user)
       let newSpeakerDetail = new SpeakerDetail({
         expertise: speakerDetail.expertise,
         fee: speakerDetail.fee,

@@ -25,12 +25,12 @@ router.get('/speaker/:speakerid', authenticate,(req, res) => {
 
     SpeakerDetail.findOne({userId: speaker._id}, (err, speakerdetail) => {
       if (err || !speakerdetail) return res.status(400).send(err || 'speakerdetail not found');
-      console.log("speakerdetail before", speakerdetail)
 
-//WET- refactor later!
+//WET- refactor later!... 
+
+      speakerFullInfo.id = speaker._id
       speakerFullInfo.email = speaker.email
       speakerFullInfo.name = speaker.name
-      speakerFullInfo.phone = speaker.phone
       speakerFullInfo.organization = speaker.organization
       speakerFullInfo.position = speaker.position
       speakerFullInfo.region = speaker.region
@@ -45,7 +45,6 @@ router.get('/speaker/:speakerid', authenticate,(req, res) => {
       speakerFullInfo.selfintroduction = speakerdetail.selfintroduction
       speakerFullInfo.background = speakerdetail.background
       speakerFullInfo.referencecomment = speakerdetail.referencecomment
-   console.log("speaker full info", speakerFullInfo)
       res.send(speakerFullInfo);
     });
   });
@@ -73,7 +72,6 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/:id', authenticate, (req, res) => {
-  console.log('user info in router params:', req.params.id)
   User.findById(req.params.id, (err, user) => {
     if (err || !user) return res.status(400).send(err || 'user not found');
     user.password = null;
@@ -99,8 +97,14 @@ router.put('/edit/:id', authenticate, (req, res) => {
   })
 })
 
+router.put('/editspeakerdetail/:id', authenticate, (req, res) => {
+  console.log("reached editspeakerdetail", req.body)
+  User.findByIdAndUpdate(req.params.id, { $set: req.body }, function(err, user){
+    res.status(err ? 400 : 200).send(err || user);
+  })
+})
+
 router.post('/speakerdetail/register', (req, res) => {
-  console.log("req.body!!", req.body)
   SpeakerDetail.register(req.body, (err, token) => {
     res.status(err ? 400 : 200).send(err || 'Speaker detail registered');
   });
