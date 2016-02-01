@@ -99,7 +99,8 @@ router.put('/edit/:id', authenticate, (req, res) => {
 
 router.put('/editspeakerdetail/:id', authenticate, (req, res) => {
   console.log("reached editspeakerdetail", req.body)
-  User.findByIdAndUpdate(req.params.id, { $set: req.body }, function(err, user){
+  console.log("reached editspeakerdetail and params", req.params)
+  SpeakerDetail.findOneAndUpdate({userId: req.params.id}, { $set: req.body }, function(err, user){
     res.status(err ? 400 : 200).send(err || user);
   })
 })

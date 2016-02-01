@@ -18,8 +18,6 @@ module.exports = function(req, res, next) {
     console.log('catch')
     return res.status(401).send('authorization required');
   }
-console.log('moment', moment().unix())
-console.log('decoded.exp', decoded.exp)
 
   if (decoded.exp < moment().unix()) {
     console.log('moment')
