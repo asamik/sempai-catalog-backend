@@ -11,7 +11,7 @@ const express = require('express')
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/connectproject');
     
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({limit: '2mb'}, { extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/build')));
 
-var corsOptions = {
+let corsOptions = {
   origin: true,
   methods: ['POST', 'GET', 'PUT']
 };
@@ -40,7 +40,7 @@ app.all('/*', function(req, res, next) {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -68,6 +68,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

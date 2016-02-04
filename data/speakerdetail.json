@@ -1,16 +1,147 @@
-[{"expertise":"Finite Element Analysis","fee":"$4.62","topics":"Leadership","header":"VP Quality Control","selfintroduction":"Sawadii Kha!","background":"Born in US, raised in Japan, studied in UK","referencecomment":"Reference Comment 3","userId":{"$oid":"56a45c2129a6d574dc21cf7f"}},
-{"expertise":"Early-stage Startups","fee":"$3.90","topics":"Leadership","header":"Payment Adjustment Coordinator","selfintroduction":"Hello!","background":"I have never been to overseas until I went to graduate school three years ago.","referencecomment":"Reference Comment 1","userId":"56a30a2b29a6d574dc21cf02"},
-{"expertise":"Management Due Diligence","fee":"$4.18","topics":"Environmental Studies","header":"Developer II","selfintroduction":"Konnichiwa","background":"Born and raised in Japan.  I recently moved to China for my work","referencecomment":"Reference Comment 3","userId":"56a45c2129a6d574dc21cf7y"},
-{"expertise":"Rural Community Development","fee":"$1.74","topics":"Finance","header":"Clinical Specialist","selfintroduction":"Konnichiwa","background":"Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.","referencecomment":"Reference Comment 1","userId":"56a45c2129a6d574dc21cf80"},
-{"expertise":"Zoo","fee":"$1.49","topics":"Leadership","header":"Paralegal","selfintroduction":"Hello!","background":"Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.","referencecomment":"Reference Comment 1","userId":"56a30a2b29a6d574dc21cf02"},
-{"expertise":"Guided Reading","fee":"$0.69","topics":"International Relations","header":"Technical Writer","selfintroduction":"Konnichiwa","background":"Born in US, raised in Japan, studied in UK","referencecomment":"Reference Comment 2","userId":"56a30a2b29a6d574dc21cef8"},
-{"expertise":"Jeet Kune Do","fee":"$0.92","topics":"Business","header":"Clinical Specialist","selfintroduction":"Konnichiwa","background":"Born in US, raised in Japan, studied in UK","referencecomment":"Reference Comment 1","userId":"56a30a2b29a6d574dc21cef7"},
-{"expertise":"Eyeliner","fee":"$0.84","topics":"Technology","header":"Compensation Analyst","selfintroduction":"Sawadii Kha!","background":"Born and raised in Japan.  I recently moved to China for my work","referencecomment":"Reference Comment 4","userId":"56a30a2b29a6d574dc21cef4"},
-{"expertise":"Office Administration","fee":"$9.68","topics":"Finance","header":"Clinical Specialist","selfintroduction":"Sawadii Kha!","background":"Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.","referencecomment":"Reference Comment 4","userId":"56a30a2b29a6d574dc21cefc"},
-{"expertise":"TPU","fee":"$2.67","topics":"Environmental Studies","header":"Electrical Engineer","selfintroduction":"Konnichiwa","background":"Born in US, raised in Japan, studied in UK","referencecomment":"Reference Comment 4","userId":"56a30a2b29a6d574dc21cef5"},
-{"expertise":"Evidence","fee":"$6.59","topics":"Politics","header":"Programmer Analyst II","selfintroduction":"Sawadii Kha!","background":"Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.","referencecomment":"Reference Comment 4","userId":"56a30a2b29a6d574dc21cef8"},
-{"expertise":"Axys","fee":"$0.99","topics":"International Relations","header":"Analog Circuit Design manager","selfintroduction":"Konnichiwa","background":"Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.","referencecomment":"Reference Comment 3","userId":"56a30a2b29a6d574dc21cef7"},
-{"expertise":"Offshore Drilling","fee":"$2.54","topics":"h¥Healthcare","header":"Research Nurse","selfintroduction":"Konnichiwa","background":"Born in US, raised in Japan, studied in UK","referencecomment":"Reference Comment 3","userId":"56a30a2b29a6d574dc21cefd"},
-{"expertise":"Corporate Tax","fee":"$6.84","topics":"Human Rights","header":"Assistant Media Planner","selfintroduction":"Hello!","background":"Born in US, raised in Japan, studied in UK","referencecomment":"Reference Comment 1","userId":"56a30a2b29a6d574dc21cef4"},
-{"expertise":"Drug Development","fee":"$4.95","topics":"h¥Healthcare","header":"Programmer Analyst I","selfintroduction":"Konnichiwa","background":"Born and raised in Japan.  I recently moved to China for my work","referencecomment":"Reference Comment 2","userId":"56a30a2b29a6d574dc21cef8"},
-{"expertise":"Keynote","fee":"$8.18","topics":"Politics","header":"VP Marketing","selfintroduction":"Sawadii Kha!","background":"I have never been to overseas until I went to graduate school three years ago.","referencecomment":"Reference Comment 1","userId":"56a30a2b29a6d574dc21cf02"}]
+[{
+    "expertise": "Finite Element Analysis",
+    "fee": "$4.62",
+    "topics": "Leadership",
+    "header": "VP Quality Control",
+    "selfintroduction": "Sawadii Kha!",
+    "background": "Born in US, raised in Japan, studied in UK",
+    "referencecomment": "Reference Comment 3",
+    "userId": {
+        "$oid": "56a45c2129a6d574dc21cf7f"
+    }
+}, {
+    "expertise": "Early-stage Startups",
+    "fee": "$3.90",
+    "topics": "Leadership",
+    "header": "Payment Adjustment Coordinator",
+    "selfintroduction": "Hello!",
+    "background": "I have never been to overseas until I went to graduate school three years ago.",
+    "referencecomment": "Reference Comment 1",
+    "userId": "56a30a2b29a6d574dc21cf02"
+}, {
+    "expertise": "Management Due Diligence",
+    "fee": "$4.18",
+    "topics": "Environmental Studies",
+    "header": "Developer II",
+    "selfintroduction": "Konnichiwa",
+    "background": "Born and raised in Japan.  I recently moved to China for my work",
+    "referencecomment": "Reference Comment 3",
+    "userId": "56a45c2129a6d574dc21cf7y"
+}, {
+    "expertise": "Rural Community Development",
+    "fee": "$1.74",
+    "topics": "Finance",
+    "header": "Clinical Specialist",
+    "selfintroduction": "Konnichiwa",
+    "background": "Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.",
+    "referencecomment": "Reference Comment 1",
+    "userId": "56a45c2129a6d574dc21cf80"
+}, {
+    "expertise": "Zoo",
+    "fee": "$1.49",
+    "topics": "Leadership",
+    "header": "Paralegal",
+    "selfintroduction": "Hello!",
+    "background": "Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.",
+    "referencecomment": "Reference Comment 1",
+    "userId": "56a30a2b29a6d574dc21cf02"
+}, {
+    "expertise": "Guided Reading",
+    "fee": "$0.69",
+    "topics": "International Relations",
+    "header": "Technical Writer",
+    "selfintroduction": "Konnichiwa",
+    "background": "Born in US, raised in Japan, studied in UK",
+    "referencecomment": "Reference Comment 2",
+    "userId": "56a30a2b29a6d574dc21cef8"
+}, {
+    "expertise": "Jeet Kune Do",
+    "fee": "$0.92",
+    "topics": "Business",
+    "header": "Clinical Specialist",
+    "selfintroduction": "Konnichiwa",
+    "background": "Born in US, raised in Japan, studied in UK",
+    "referencecomment": "Reference Comment 1",
+    "userId": "56a30a2b29a6d574dc21cef7"
+}, {
+    "expertise": "Eyeliner",
+    "fee": "$0.84",
+    "topics": "Technology",
+    "header": "Compensation Analyst",
+    "selfintroduction": "Sawadii Kha!",
+    "background": "Born and raised in Japan.  I recently moved to China for my work",
+    "referencecomment": "Reference Comment 4",
+    "userId": "56a30a2b29a6d574dc21cef4"
+}, {
+    "expertise": "Office Administration",
+    "fee": "$9.68",
+    "topics": "Finance",
+    "header": "Clinical Specialist",
+    "selfintroduction": "Sawadii Kha!",
+    "background": "Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.",
+    "referencecomment": "Reference Comment 4",
+    "userId": "56a30a2b29a6d574dc21cefc"
+}, {
+    "expertise": "TPU",
+    "fee": "$2.67",
+    "topics": "Environmental Studies",
+    "header": "Electrical Engineer",
+    "selfintroduction": "Konnichiwa",
+    "background": "Born in US, raised in Japan, studied in UK",
+    "referencecomment": "Reference Comment 4",
+    "userId": "56a30a2b29a6d574dc21cef5"
+}, {
+    "expertise": "Evidence",
+    "fee": "$6.59",
+    "topics": "Politics",
+    "header": "Programmer Analyst II",
+    "selfintroduction": "Sawadii Kha!",
+    "background": "Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.",
+    "referencecomment": "Reference Comment 4",
+    "userId": "56a30a2b29a6d574dc21cef8"
+}, {
+    "expertise": "Axys",
+    "fee": "$0.99",
+    "topics": "International Relations",
+    "header": "Analog Circuit Design manager",
+    "selfintroduction": "Konnichiwa",
+    "background": "Born in UK, raised in Tokyo, Osaka, Nagoya, and Taiwan.",
+    "referencecomment": "Reference Comment 3",
+    "userId": "56a30a2b29a6d574dc21cef7"
+}, {
+    "expertise": "Offshore Drilling",
+    "fee": "$2.54",
+    "topics": "h¥Healthcare",
+    "header": "Research Nurse",
+    "selfintroduction": "Konnichiwa",
+    "background": "Born in US, raised in Japan, studied in UK",
+    "referencecomment": "Reference Comment 3",
+    "userId": "56a30a2b29a6d574dc21cefd"
+}, {
+    "expertise": "Corporate Tax",
+    "fee": "$6.84",
+    "topics": "Human Rights",
+    "header": "Assistant Media Planner",
+    "selfintroduction": "Hello!",
+    "background": "Born in US, raised in Japan, studied in UK",
+    "referencecomment": "Reference Comment 1",
+    "userId": "56a30a2b29a6d574dc21cef4"
+}, {
+    "expertise": "Drug Development",
+    "fee": "$4.95",
+    "topics": "h¥Healthcare",
+    "header": "Programmer Analyst I",
+    "selfintroduction": "Konnichiwa",
+    "background": "Born and raised in Japan.  I recently moved to China for my work",
+    "referencecomment": "Reference Comment 2",
+    "userId": "56a30a2b29a6d574dc21cef8"
+}, {
+    "expertise": "Keynote",
+    "fee": "$8.18",
+    "topics": "Politics",
+    "header": "VP Marketing",
+    "selfintroduction": "Sawadii Kha!",
+    "background": "I have never been to overseas until I went to graduate school three years ago.",
+    "referencecomment": "Reference Comment 1",
+    "userId": "56a30a2b29a6d574dc21cf02"
+}]

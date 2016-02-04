@@ -20,7 +20,7 @@ let userSchema = mongoose.Schema({
   region: {type: String},
   profilePic: {type: String},
   admin: {type: Boolean, default: false, required: true},
-  speaker: {type: Boolean, default: false, required: true}
+  speakerId: {type: Boolean, default: false, required: true}
 });
 
 userSchema.methods.token = function() {
@@ -58,26 +58,41 @@ userSchema.statics.findspeakerFullData = function(speakerid, cb) {
       if (err || !speakerdetail) return cb(err || 'speakerdetail not found');
 
       speaker = speaker.toObject();
-      // delete speaker.password;
       speaker.expertise = speakerdetail.expertise;
       speaker.fee = speakerdetail.fee;
       speaker.topics = speakerdetail.topics;
       speaker.header = speakerdetail.header;
       speaker.selfintroduction = speakerdetail.selfintroduction;
       speaker.background = speakerdetail.background;
-      speaker.referencecomment = speakerdetail.referencecomment;   
-
+      // speaker.referencecomment = speakerdetail.referencecomment;
       cb(null, speaker);
     });  
   });
 }
 
+userSchema.statics.registerAsSpeaker = function(userid, speakerDetail, cb) {
+  User.findByIdAndUpdate(userid, {$set: {speaker: true}}, {new: true}, (err, user) => {
+    if (err || !user) return cb(err || 'user not found');
+
+    let newSpeakerDetail = new SpeakerDetail({
+      expertise: speakerDetail.expertise,
+      fee: speakerDetail.fee,
+      topics: speakerDetail.topics,
+      header: speakerDetail.header,
+      selfintroduction: speakerDetail.selfintroduction,
+      background: speakerDetail.background,
+      userId: userid
+    });
+    newSpeakerDetail.save((err, savedSpeakerDetail) => {
+      cb(null, savedSpeakerDetail);
+    })
+  });
+};
 
 userSchema.statics.register = function(userInfo, cb) {
   let email     = userInfo.email
     , password  = userInfo.password
     , password2 = userInfo.password2;
-    console.log('userInfo', userInfo)
 
   // compare passwords
   if (password !== password2) {
@@ -107,7 +122,6 @@ userSchema.statics.register = function(userInfo, cb) {
         newUser.save((err, savedUser) => {
           savedUser.password = null;
           let userInfoWithToken = { id: savedUser._id, token: savedUser.token() };
-          console.log("userInfoWithToken", userInfoWithToken)
           return cb(err, userInfoWithToken);
         })
       });

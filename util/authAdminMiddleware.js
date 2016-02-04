@@ -12,7 +12,7 @@ module.exports = function(req, res, next) {
   }
 
   try {
-    var decoded = jwt.decode(token, process.env.JWT_SECRET);
+    let decoded = jwt.decode(token, process.env.JWT_SECRET);
   } catch (e) {
     return res.status(401).send('authorization required');
   }

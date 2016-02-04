@@ -10,24 +10,19 @@ let router = express.Router();
 
 router.get('/', authenticate, (req, res) => {
   User.find({'speaker': true}, (err, users) => {
-    users.forEach(user => {
-      user.password = null;
-      return user;
+    let userIdList = users.map(user => {
+      return user._id;
     });
     if (err) return res.status(400).send(err);
-    let allSpeakersFullInfo = [];
-    async.map(users, findspeakerFullInfowithcb(user, cb), function(err, allSpeakersFullInfo) {
-      if(err) {
-        return res.status(400).send(err)
-      } else {
-        res.send(allSpeakersFullInfo);
-      }
+
+    async.map(userIdList, User.findspeakerFullData, (err, speaker) => {
+      if(err) return res.status(400).send(err);
+        res.send(results);
     });
   })
 });
 
 router.get('/speaker/:speakerid', authenticate,(req, res) => {
-  console.log("reached")
   User.findspeakerFullData(req.params.speakerid, (err, speakerFulldata) => {
     if(err) return res.status(400).send(err);
     res.send(speakerFulldata);    
@@ -87,11 +82,10 @@ router.put('/editspeakerdetail/:id', authenticate, (req, res) => {
   })
 })
 
-router.post('/speakerdetail/register', (req, res) => {
-  SpeakerDetail.register(req.body, (err, token) => {
-    res.status(err ? 400 : 200).send(err || 'Speaker detail registered');
+router.post('/speakerdetail/register/:userid', (req, res) => {
+  User.registerAsSpeaker(req.params.userid, req.body, (err, savedSpeakerDetail) => {
+    res.status(err ? 400 : 200).send(err || savedSpeakerDetail);
   });
 });
-
 
 module.exports = router;
