@@ -15,9 +15,10 @@ router.get('/', authenticate, (req, res) => {
     });
     if (err) return res.status(400).send(err);
 
-    async.map(userIdList, User.findspeakerFullData, (err, speaker) => {
+    async.map(userIdList, User.findspeakerFullData, (err, speakers) => {
       if(err) return res.status(400).send(err);
-        res.send(results);
+      console.log("speakers", speakers)
+        res.send(speakers);
     });
   })
 });
@@ -82,7 +83,7 @@ router.put('/editspeakerdetail/:id', authenticate, (req, res) => {
   })
 })
 
-router.post('/speakerdetail/register/:userid', (req, res) => {
+router.post('/speakerdetail/register/:userid', authenticate, (req, res) => {
   User.registerAsSpeaker(req.params.userid, req.body, (err, savedSpeakerDetail) => {
     res.status(err ? 400 : 200).send(err || savedSpeakerDetail);
   });
