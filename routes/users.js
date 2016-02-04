@@ -16,86 +16,23 @@ router.get('/', authenticate, (req, res) => {
     });
     if (err) return res.status(400).send(err);
     let allSpeakersFullInfo = [];
-console.log("users:", users)
     async.map(users, findspeakerFullInfowithcb(user, cb), function(err, allSpeakersFullInfo) {
       if(err) {
         return res.status(400).send(err)
       } else {
-        console.log("allSpeakersFullInfo1", allSpeakersFullInfo);
         res.send(allSpeakersFullInfo);
       }
     });
-
-    // allSpeakersFullInfo = users.map(user => {
-    //    return findspeakerFullInfo(user._id);  
-    // });
-
   })
 });
 
 router.get('/speaker/:speakerid', authenticate,(req, res) => {
-  res.send(findspeakerFullInfo(req.params.speakerid));
+  console.log("reached")
+  User.findspeakerFullData(req.params.speakerid, (err, speakerFulldata) => {
+    if(err) return res.status(400).send(err);
+    res.send(speakerFulldata);    
+  })
 });
-
-function findspeakerFullInfo (speaker) {
-  let speakerFullInfo = {};
-  User.findById(speaker._id, (err, speaker) => {
-    if (err || !speaker) return (err || 'speaker not found');
-    speakerFullInfo.id = speaker._id
-    speakerFullInfo.email = speaker.email
-    speakerFullInfo.name = speaker.name
-    speakerFullInfo.organization = speaker.organization
-    speakerFullInfo.position = speaker.position
-    speakerFullInfo.region = speaker.region
-    speakerFullInfo.profilepic = speaker.profilepic
-    speakerFullInfo.admin = speaker.admin
-    speakerFullInfo.speaker = speaker.speaker
-  });
-  
-  SpeakerDetail.findOne({userId: speaker._id}, (err, speakerdetail) => {
-    if (err || !speakerdetail) return (err || 'speakerdetail not found');
-//WET- refactor later!... 
-    speakerFullInfo.expertise = speakerdetail.expertise
-    speakerFullInfo.fee = speakerdetail.fee
-    speakerFullInfo.topics = speakerdetail.topics
-    speakerFullInfo.header = speakerdetail.header
-    speakerFullInfo.selfintroduction = speakerdetail.selfintroduction
-    speakerFullInfo.background = speakerdetail.background
-    speakerFullInfo.referencecomment = speakerdetail.referencecomment
-  });  
-  return speakerFullInfo;
-}
-
-function findspeakerFullInfowithcb (speaker, cb) {
-  console.log("speaker", speaker)
-
-  let speakerFullInfo = {};
-  User.findById(speaker._id, (err, speaker) => {
-    if (err || !speaker) return (err || 'speaker not found');
-    speakerFullInfo.id = speaker._id
-    speakerFullInfo.email = speaker.email
-    speakerFullInfo.name = speaker.name
-    speakerFullInfo.organization = speaker.organization
-    speakerFullInfo.position = speaker.position
-    speakerFullInfo.region = speaker.region
-    speakerFullInfo.profilepic = speaker.profilepic
-    speakerFullInfo.admin = speaker.admin
-    speakerFullInfo.speaker = speaker.speaker
-  });
-  
-  SpeakerDetail.findOne({userId: speaker._id}, (err, speakerdetail) => {
-    if (err || !speakerdetail) return (err || 'speakerdetail not found');
-//WET- refactor later!... 
-    speakerFullInfo.expertise = speakerdetail.expertise
-    speakerFullInfo.fee = speakerdetail.fee
-    speakerFullInfo.topics = speakerdetail.topics
-    speakerFullInfo.header = speakerdetail.header
-    speakerFullInfo.selfintroduction = speakerdetail.selfintroduction
-    speakerFullInfo.background = speakerdetail.background
-    speakerFullInfo.referencecomment = speakerdetail.referencecomment
-  });  
-  return cb(null, speakerFullInfo);
-}
 
 router.post('/checkemail', (req, res) => {
   User.findOne({email: req.body.email}, (err, user) => {

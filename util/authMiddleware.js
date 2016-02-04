@@ -11,8 +11,6 @@ module.exports = function(req, res, next) {
   let decoded;
   try {
     decoded = jwt.decode(req.headers.authorization.replace(/(Bearer )(.*)/, '$2'), process.env.JWT_SECRET);
-    console.log('decoded in try', decoded)
-    console.log('decoded in try reqparams:', req.params)
   } catch (e) {
     logMyErrors(e);
     console.log('catch')
