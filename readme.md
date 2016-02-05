@@ -16,7 +16,7 @@ Features:
 ## Deployed to:
 
 Frontend:
-http://asamik.github.io/sc-fe
+http://asamik.github.io/sempai-catalog-frontend
 
 Backend(API):
 https://lit-hamlet-87436.herokuapp.com
@@ -24,7 +24,7 @@ https://lit-hamlet-87436.herokuapp.com
 ## Link to each repo:
 
 Frontend:
-https://github.com/asamik/sc-fe.git
+https://github.com/asamik/sempai-catalog-frontend.git
 
 Backend (this repo):
 https://github.com/asamik/sempai-catalog-backend.git
