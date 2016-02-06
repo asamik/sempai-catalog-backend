@@ -20,7 +20,7 @@ let userSchema = mongoose.Schema({
   region: {type: String},
   profilePic: {type: String},
   admin: {type: Boolean, default: false, required: true},
-  speakerId: {type: Boolean, default: false, required: true}
+  speaker: {type: Boolean, default: false, required: true}
 });
 
 userSchema.methods.token = function() {
