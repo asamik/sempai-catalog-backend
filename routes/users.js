@@ -62,26 +62,28 @@ router.get('/:id', authenticate, (req, res) => {
 router.put('/addfriend/:userId/:friendId', authenticate, (req, res) => {
   User.findByIdAndUpdate(req.params.userId, { $push: {friends: req.params.friendId} }, function(err, user){
     res.status(err ? 400 : 200).send(err || 'friend added');
-  })
-})
+  });
+});
 
 router.put('/removefriend/:userId/:friendId', authenticate, (req, res) => {
-  User.findByIdAndUpdate(req.params.userId, { $pull: {friends: req.params.friendId} }, function(err, user){
+  User.findByIdAndUpdate(req.params.userId, { $pull: {friends: req.params.friendId} }, (err, user) => {
     res.status(err ? 400 : 200).send(err || 'friend removed');
-  })
-})
+  });
+});
 
 router.put('/edit/:id', authenticate, (req, res) => {
-  User.findByIdAndUpdate(req.params.id, { $set: req.body }, function(err, user){
-    res.status(err ? 400 : 200).send(err || user);
-  })
-})
+  User.edit(req.body, req.params.id, (err, updatedUser) => {
+    console.log("updatedUser!!", updatedUser)
+    res.status(err ? 400 : 200).send(err || updatedUser);
+  });
+});
 
 router.put('/editspeakerdetail/:id', authenticate, (req, res) => {
-  SpeakerDetail.findOneAndUpdate({userId: req.params.id}, { $set: req.body }, function(err, user){
-    res.status(err ? 400 : 200).send(err || user);
-  })
-})
+  SpeakerDetail.findOneAndUpdate({userId: req.params.id}, { $set: req.body }, (err, user) => {
+    if(err) return res.status(400).send(err);
+    res.send(user);
+  });
+});
 
 router.post('/speakerdetail/register/:userid', authenticate, (req, res) => {
   User.registerAsSpeaker(req.params.userid, req.body, (err, savedSpeakerDetail) => {

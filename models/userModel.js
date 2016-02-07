@@ -51,7 +51,6 @@ userSchema.statics.login = function(userInfo, cb) {
 }
 
 userSchema.statics.findspeakerFullData = function(speakerid, cb) {
-      console.log("reached model!!")
   User.findById(speakerid, (err, speaker) => {
     if (err || !speaker) return cb(err || 'speaker not found');
 
@@ -111,7 +110,7 @@ userSchema.statics.register = function(userInfo, cb) {
     bcrypt.genSalt(CONFIG.saltRounds, (err, salt) => {
       if (err) return cb(err);
       bcrypt.hash(password, salt, (err, hashedPassword) => {
-        if (err) return cb(err);
+        if (err) return cb(err)
         let newUser = new User({
           email: email,
           password: hashedPassword,
@@ -129,6 +128,21 @@ userSchema.statics.register = function(userInfo, cb) {
     });
   });
 };
+
+userSchema.statics.edit = function(user, userid,cb) {
+  let updatedUser = {
+    name: user.name,
+    position: user.position,
+    region: user.region,
+    organization: user.organization
+  }
+  console.log("userid before", userid);
+  console.log("updatedUser before", updatedUser);
+  User.findByIdAndUpdate(userid, { $set: updatedUser }, {new: true}, (err, userAfterUpdate) => {
+        if (err || !user) return cb(err || 'user not found in update');
+    cb(null, userAfterUpdate);
+  })
+}
 
 User = mongoose.model('User', userSchema);
 module.exports = User;
