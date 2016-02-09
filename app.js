@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/build')));
 
 
-let whitelist = ['http://asamik.github.io/sempai-catalog-frontend', 'http://localhost:4000', 'http://localhost:3001'];
+let whitelist = ['http://asamik.github.io/sempai-catalog-frontend', 'http://localhost:4000', 'http://localhost:3001',  'http://asamik.github.io/connectproject'];
 let corsOptions = {
   origin: function(origin, callback) {
     let originIsWhitelisted = whitelist.indexOf(origin) !== -1;
