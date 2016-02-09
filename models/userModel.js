@@ -18,7 +18,6 @@ let userSchema = mongoose.Schema({
   organization: {type: String},
   position: {type: String},
   region: {type: String},
-  profilePic: {type: String},
   admin: {type: Boolean, default: false, required: true},
   speaker: {type: Boolean, default: false, required: true}
 });
@@ -117,8 +116,7 @@ userSchema.statics.register = function(userInfo, cb) {
           name: userInfo.name,
           organization: userInfo.organization,
           position: userInfo.position,
-          region: userInfo.region,
-          profilePic: userInfo.profilePic
+          region: userInfo.region
         });
         newUser.save((err, savedUser) => {
           savedUser.password = null;
