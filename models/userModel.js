@@ -56,6 +56,7 @@ userSchema.statics.findspeakerFullData = function(speakerid, cb) {
       if (err || !speakerdetail) return cb(err || 'speakerdetail not found');
 
       speaker = speaker.toObject();
+      speaker.profilePic = speakerdetail.profilePic;
       speaker.expertise = speakerdetail.expertise;
       speaker.fee = speakerdetail.fee;
       speaker.topics = speakerdetail.topics;
@@ -73,6 +74,7 @@ userSchema.statics.registerAsSpeaker = function(userid, speakerDetail, cb) {
     if (err || !user) return cb(err || 'user not found');
 
     let newSpeakerDetail = new SpeakerDetail({
+      profilePic: speakerDetail.profilePic,
       expertise: speakerDetail.expertise,
       fee: speakerDetail.fee,
       topics: speakerDetail.topics,

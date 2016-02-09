@@ -16,6 +16,7 @@ let speakerDetailSchema = mongoose.Schema({
   selfintroduction: {type: String},
   background: {type: String},
   referencecomment: {type: String},
+  profilePic: {type: String},
   userId: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
