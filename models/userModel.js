@@ -117,6 +117,7 @@ userSchema.statics.register = function(userInfo, cb) {
           name: userInfo.name,
           organization: userInfo.organization,
           position: userInfo.position,
+          region: userInfo.region,
           profilePic: userInfo.profilePic
         });
         newUser.save((err, savedUser) => {
@@ -136,8 +137,6 @@ userSchema.statics.edit = function(user, userid,cb) {
     region: user.region,
     organization: user.organization
   }
-  console.log("userid before", userid);
-  console.log("updatedUser before", updatedUser);
   User.findByIdAndUpdate(userid, { $set: updatedUser }, {new: true}, (err, userAfterUpdate) => {
         if (err || !user) return cb(err || 'user not found in update');
     cb(null, userAfterUpdate);

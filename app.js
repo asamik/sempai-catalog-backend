@@ -25,11 +25,16 @@ app.use(bodyParser.urlencoded({limit: '2mb'}, { extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/build')));
 
+
+let whitelist = ['http://asamik.github.io/sempai-catalog-frontend', 'http://localhost:4000', 'http://localhost:3001'];
 let corsOptions = {
-  origin: true,
-  methods: ['POST', 'GET', 'PUT']
+  origin: function(origin, callback) {
+    let originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+    callback(null, originIsWhitelisted);
+  }
 };
 app.use(cors(corsOptions));
+
 
 app.use('/users', require('./routes/users'));
 app.use('/admins', require('./routes/admins'));
