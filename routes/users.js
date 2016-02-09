@@ -14,11 +14,8 @@ router.get('/', authenticate, (req, res) => {
       return user._id;
     });
     if (err) return res.status(400).send(err);
-  console.log("userIdList", userIdList)
-
     async.map(userIdList, User.findspeakerFullData, (err, speakers) => {
       if(err) return res.status(400).send(err);
-  console.log("speakers", speakers)
       res.send(speakers);	
     });
   })

@@ -52,7 +52,6 @@ userSchema.statics.login = function(userInfo, cb) {
 userSchema.statics.findspeakerFullData = function(speakerid, cb) {
   User.findById(speakerid, (err, speaker) => {
     if (err || !speaker) return cb(err || 'speaker not found');
-
     SpeakerDetail.findOne({userId: speaker._id}, (err, speakerdetail) => {
       if (err || !speakerdetail) return cb(err || 'speakerdetail not found');
 
